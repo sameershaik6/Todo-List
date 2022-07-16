@@ -9,7 +9,7 @@ function App() {
 
   const addTask = () => {
     if(currentTask === "") {
-      alert("please enter todo to display")
+      alert("please add todo to display")
     } else {
       setTodoList([...todoList, currentTask]);
       inputTask.current.value = "";
