@@ -55,7 +55,7 @@ function App() {
                   <div id="task" key={key}>
                     <li>
                       <input
-                        className='checkb'
+                        style={{float: 'left'}}
                         type="checkbox"
                         checked={val.completed}
                         onChange={(e) => handleToggle(e, val)}
