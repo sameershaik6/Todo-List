@@ -11,7 +11,7 @@ function App() {
     if(currentTask === "") {
       alert("please add todo to display")
     } else {
-      setTodoList([...todoList, currentTask]);
+      setTodoList([...todoList, {task: currentTask, completed: false}]);
       inputTask.current.value = "";
       setCurrentTask("");
     }
@@ -25,6 +25,17 @@ function App() {
       )
   }
 
+  const handleToggle = (e, val) => {
+    console.log(e.target.checked);
+    setTodoList(todoList.map(item => {
+      if(item === val) {
+        return {...item, completed: !item.completed}
+      }
+      return item;
+    }));
+  }
+
+  console.log(todoList);
   return (
     <div className="App">
       <h1>React To-Do List</h1>
@@ -41,10 +52,17 @@ function App() {
           <ul>
             {todoList.map((val, key) => {
                 return(
-                  <div id="task">
-                    <li key={key}>
-                      <input className='checkb' type="checkbox" />
-                      <span>{val}</span>
+                  <div id="task" key={key}>
+                    <li>
+                      <input
+                        className='checkb'
+                        type="checkbox"
+                        checked={val.completed}
+                        onChange={(e) => handleToggle(e, val)}
+                      />
+                      <span style={val.completed ? {textDecoration: "line-through"}: null}>
+                        {val.task}
+                      </span>
                     </li>
                     <button onClick={() => deleteTask(val)}>X</button>
                   </div>
